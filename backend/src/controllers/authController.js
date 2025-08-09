@@ -32,7 +32,7 @@ export async function login(req, res) {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "lax", // change to 'none' with secure:true in prod
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // 'none' for cross-origin in production
       secure: process.env.NODE_ENV === "production"
     });
     console.log("Login complete");
@@ -44,7 +44,11 @@ export async function login(req, res) {
 }
 
 export function logout(req, res) {
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: process.env.NODE_ENV === "production"
+  });
   res.json({ message: "Logged out" });
 }
 
