@@ -1,13 +1,13 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../utils/api.js";
 
 export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await axios.post("/api/auth/logout", {}, { withCredentials: true });
+      await api.post("/auth/logout", {});
       setIsLoggedIn(false);
       navigate("/login");
     } catch (error) {

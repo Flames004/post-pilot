@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../utils/api.js";
 import { useNavigate } from "react-router-dom";
 
 export default function Login({ setIsLoggedIn }) {
@@ -13,14 +13,17 @@ export default function Login({ setIsLoggedIn }) {
     setError("");
 
     try {
-      await axios.post(
-        "/api/auth/login",
-        { email, password },
-        { withCredentials: true }
+      console.log("Attempting login...");
+      const response = await api.post(
+        "/auth/login",
+        { email, password }
       );
+      console.log("Login response:", response);
       setIsLoggedIn(true);
       navigate("/dashboard");
     } catch (err) {
+      console.error("Login error:", err);
+      console.error("Error response:", err.response);
       setError(err.response?.data?.message || "Login failed");
     }
   };

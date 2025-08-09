@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../utils/api.js";
 import IdeaCard from "../components/IdeaCard";
 
 export default function Dashboard() {
@@ -16,10 +16,9 @@ export default function Dashboard() {
     setIdeas([]);
 
     try {
-      const res = await axios.post(
-        "/api/ideas",
-        { keyword, type },
-        { withCredentials: true }
+      const res = await api.post(
+        "/ideas",
+        { keyword, type }
       );
       setIdeas(res.data.ideas || []);
     } catch (err) {

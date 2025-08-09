@@ -13,20 +13,34 @@ export async function register(req, res) {
 }
 
 export async function login(req, res) {
+  console.log("Login attempt with:", req.body);
   const { email, password } = req.body;
   try {
+    console.log("Looking for user with email:", email);
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: "Invalid credentials" });
+    if (!user) {
+      console.log("User not found");
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+    console.log("User found, checking password");
     const ok = await bcrypt.compare(password, user.password);
-    if (!ok) return res.status(400).json({ message: "Invalid credentials" });
+    if (!ok) {
+      console.log("Password mismatch");
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+    console.log("Login successful, creating token");
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "lax", // change to 'none' with secure:true in prod
       secure: process.env.NODE_ENV === "production"
     });
+    console.log("Login complete");
     res.json({ message: "Logged in" });
-  } catch (e) { res.status(500).json({ message: e.message }); }
+  } catch (e) { 
+    console.error("Login error:", e);
+    res.status(500).json({ message: e.message }); 
+  }
 }
 
 export function logout(req, res) {
