@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://your-frontend-app.vercel.app'] // Replace with your actual Vercel URL
+    ? ['https://post-pilot-sable.vercel.app'] // Replace with your actual Vercel URL
     : true, // Allow all origins in development
   credentials: true
 }));
