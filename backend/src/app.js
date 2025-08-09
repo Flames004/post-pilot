@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://post-pilot-sable.vercel.app'] // Replace with your actual Vercel URL
+    ? ['https://post-pilot-k5hgkzry2-deepak-shuklas-projects-b71b1dc4.vercel.app'] // Replace with your actual Vercel URL
     : true, // Allow all origins in development
   credentials: true
 }));
