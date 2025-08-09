@@ -14,7 +14,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-  origin: true, // Allow all origins in development
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://your-frontend-app.vercel.app'] // Replace with your actual Vercel URL
+    : true, // Allow all origins in development
   credentials: true
 }));
 
