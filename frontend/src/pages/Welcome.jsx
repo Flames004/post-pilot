@@ -4,29 +4,6 @@ import { Link } from "react-router-dom";
 export default function Welcome() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {/* Navigation */}
-      <nav className="bg-white/80 backdrop-blur-sm border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            PostPilot
-          </div>
-          <div className="flex gap-4">
-            <Link 
-              to="/login" 
-              className="text-gray-600 hover:text-gray-800 transition-colors font-medium"
-            >
-              Sign In
-            </Link>
-            <Link 
-              to="/register" 
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-medium"
-            >
-              Get Started
-            </Link>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section className="pt-20 pb-32 px-6">
         <div className="max-w-6xl mx-auto text-center">

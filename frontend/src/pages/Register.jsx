@@ -1,22 +1,27 @@
 import React, { useState } from "react";
-import api from "../utils/api.js";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { register } = useAuth();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
     try {
-      await api.post("/auth/register", { email, password });
-      navigate("/login");
+      await register(email, password);
+      navigate("/dashboard");
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed");
+      setError(err.message || "Registration failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -74,9 +79,10 @@ export default function Register() {
             
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white py-4 rounded-xl hover:from-green-700 hover:to-blue-700 transition-all font-semibold text-lg shadow-lg transform hover:scale-[1.02]"
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white py-4 rounded-xl hover:from-green-700 hover:to-blue-700 transition-all font-semibold text-lg shadow-lg transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
-              ✨ Create Account
+              {loading ? "🔄 Creating Account..." : "✨ Create Account"}
             </button>
           </form>
           

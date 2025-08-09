@@ -47,3 +47,15 @@ export function logout(req, res) {
   res.clearCookie("token");
   res.json({ message: "Logged out" });
 }
+
+export async function getMe(req, res) {
+  try {
+    const user = await User.findById(req.userId).select('-password');
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json({ user: { id: user._id, email: user.email } });
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
+}
