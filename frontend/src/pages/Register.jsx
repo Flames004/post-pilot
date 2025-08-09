@@ -34,7 +34,7 @@ export default function Register() {
         {/* Register Form */}
         <div className="bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
           <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-            🚀 Create Account
+            Create Account
           </h2>
           
           {error && (
@@ -46,7 +46,7 @@ export default function Register() {
           <form onSubmit={handleRegister} className="space-y-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                📧 Email Address
+                Email Address
               </label>
               <input
                 type="email"
@@ -60,7 +60,7 @@ export default function Register() {
             
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                🔒 Password
+                Password
               </label>
               <input
                 type="password"

@@ -28,19 +28,19 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
                 to="/dashboard" 
                 className="text-white hover:text-blue-100 transition-colors font-medium"
               >
-                🎯 Dashboard
+                Dashboard
               </Link>
               <Link 
                 to="/history" 
                 className="text-white hover:text-blue-100 transition-colors font-medium"
               >
-                📚 History
+                History
               </Link>
               <button
                 onClick={handleLogout}
                 className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors shadow-md"
               >
-                🚪 Logout
+                Logout
               </button>
             </>
           ) : (

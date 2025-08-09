@@ -42,7 +42,7 @@ export default function Login({ setIsLoggedIn }) {
         {/* Login Form */}
         <div className="bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
           <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-            🔑 Sign In
+            Sign In
           </h2>
           
           {error && (
@@ -54,7 +54,7 @@ export default function Login({ setIsLoggedIn }) {
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                📧 Email Address
+                Email Address
               </label>
               <input
                 type="email"
@@ -68,7 +68,7 @@ export default function Login({ setIsLoggedIn }) {
             
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                🔒 Password
+                Password
               </label>
               <input
                 type="password"
