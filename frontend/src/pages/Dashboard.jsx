@@ -6,6 +6,7 @@ export default function Dashboard() {
   const [keyword, setKeyword] = useState("");
   const [type, setType] = useState("social");
   const [ideas, setIdeas] = useState([]);
+  const [hashtags, setHashtags] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -21,6 +22,7 @@ export default function Dashboard() {
         { keyword, type }
       );
       setIdeas(res.data.ideas || []);
+      setHashtags(res.data.hashtags || []);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to generate ideas");
     } finally {
@@ -68,7 +70,11 @@ export default function Dashboard() {
 
       <div className="mt-6 grid gap-4">
         {ideas.map((idea, idx) => (
-          <IdeaCard key={idx} idea={idea} />
+          <IdeaCard 
+            key={idx} 
+            content={idea} 
+            hashtags={hashtags[idx] || []} 
+          />
         ))}
       </div>
     </div>
