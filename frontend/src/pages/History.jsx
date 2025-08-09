@@ -25,9 +25,22 @@ export default function History() {
       {ideas.length === 0 ? (
         <p className="text-gray-500 text-center">No ideas generated yet.</p>
       ) : (
-        <div className="grid gap-4">
-          {ideas.map((idea, idx) => (
-            <IdeaCard key={idx} idea={idea} />
+        <div className="space-y-8">
+          {ideas.map((ideaDoc, docIdx) => (
+            <div key={ideaDoc._id || docIdx} className="border-b pb-6">
+              <h3 className="text-xl font-semibold mb-2 text-gray-700">
+                {ideaDoc.keyword} - {ideaDoc.type}
+              </h3>
+              <div className="grid gap-4">
+                {ideaDoc.ideas?.map((idea, ideaIdx) => (
+                  <IdeaCard 
+                    key={ideaIdx} 
+                    content={idea} 
+                    hashtags={ideaDoc.hashtags?.[ideaIdx] || []} 
+                  />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       )}
