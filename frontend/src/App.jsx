@@ -1,12 +1,41 @@
-import React from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Navbar from "./components/NavBar";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import History from "./pages/History";
 
-const App = () => {
+export default function App() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold">Welcome to PostPilot</h1>
-      <p className="mt-4 text-lg">Your AI-powered content generation tool</p>
-    </div>
-  )
-}
+    <Router>
+      <Routes>
+        {/* Public routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-export default App
+        {/* Protected routes */}
+        <Route
+          path="/dashboard"
+          element={
+            <>
+              <Navbar />
+              <Dashboard />
+            </>
+          }
+        />
+        <Route
+          path="/history"
+          element={
+            <>
+              <Navbar />
+              <History />
+            </>
+          }
+        />
+
+        {/* Default redirect */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </Router>
+  );
+}
